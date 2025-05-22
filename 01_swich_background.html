@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="01_swich_background.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="background">
+    <div class="btn-box">
+      <button class="left"></button>
+      <button class="right"></button>
+    </div>
+  </div>
+</body>
+
+<script>
+  window.document.addEventListener('DOMContentLoaded', () => {
+    const background = window.document.querySelector('.background');
+    const leftButton = window.document.querySelector('.left');
+    const rightButton = window.document.querySelector('.right');
+
+
+    leftButton.addEventListener('click', () => {
+      if (background.style.background === 'white') {
+        background.style.background = 'green';
+      }
+      else if (background.style.background === 'red') {
+        background.style.background = 'white';
+      }
+      else if (background.style.background === 'blue') {
+        background.style.background = 'red';
+      }
+      else if (background.style.background === 'green') {
+        background.style.background = 'blue';
+      }
+      else {
+        background.style.background = 'white';
+      }
+    });
+
+    rightButton.addEventListener('click', () => {
+      if (background.style.background === 'white') {
+        background.style.background = 'red';
+      }
+      else if (background.style.background === 'red') {
+        background.style.background = 'blue';
+      }
+      else if (background.style.background === 'blue') {
+        background.style.background = 'green';
+      }
+      else {
+        background.style.background = 'white';
+      }
+    });
+  });
+
+</script>
+</html>
