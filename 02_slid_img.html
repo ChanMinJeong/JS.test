@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="02_slid_img.css" />
+  </head>
+  <body>
+    <div class="dispaly">
+      <div id="one"></div>
+      <div id="two"></div>
+      <div id="three"></div>
+      <div id="four"></div>
+    </div>
+    <div class="background">
+      <div class="btn-box">
+        <button id="left">왼쪽</button>
+        <button id="right">오른쪽</button>
+      </div>
+      <div class="img-Box" id="imgBox">
+        <img class="chuu" src="./images/chuu_1.jpeg" />
+        <img class="chuu" src="./images/chuu_2.jpeg" />
+        <img class="chuu" src="./images/chuu_3.jpeg" />
+        <img class="chuu" src="./images/chuu_4.jpeg" />
+      </div>
+    </div>
+
+    <div class="test-box">
+      <div class="test"></div>
+      <span>이미지 파일 내려서 여기부턴 홈페이지 내용들</span>
+    </div>
+  </body>
+
+  <script>
+    const imgBox = document.getElementById("imgBox");
+    const leftBtn = document.getElementById("left");
+    const rightBtn = document.getElementById("right");
+    const ui_1 = document.getElementById("one");
+    const ui_2 = document.getElementById("two");
+    const ui_3 = document.getElementById("three");
+    const ui_4 = document.getElementById("four");
+
+    let currentIndex = 0; //화면 움직일 때 사용할 변수
+    const totalSlides = 4; //이미지 갯수를 정함
+
+    function updateSlidePosition() {
+      const offset = -currentIndex * 100; //오프셋 변수에 화면 움직일 때 사용할 변수를 -값부터 * 100 (최초값은 -0 * 100 = 0 / -1 * 100 = -100)
+      imgBox.style.transform = `translateX(${offset}vw)`; //트랜슬레이트x는 트랜스폼을 움직이는 함수고 $(offset)vw만큼 움직임, 0이면 1번(최초화면) -100이면 -100vw만큼 이동해서 2번 이미지가 나오게
+      switch (currentIndex) {
+        case 0: {
+          ui_1.style.opacity = "1";
+          ui_2.style.opacity = "0.3"; //각각 id값을 받아온 변수에 css 스타일 오파시티 값을 변경함
+          ui_3.style.opacity = "0.3";
+          ui_4.style.opacity = "0.3";
+          break;
+        }
+        case 1: {
+          ui_2.style.opacity = "1";
+          ui_1.style.opacity = "0.3";
+          ui_3.style.opacity = "0.3";
+          ui_4.style.opacity = "0.3";
+          break;
+        }
+        case 2: {
+          ui_3.style.opacity = "1";
+          ui_1.style.opacity = "0.3";
+          ui_2.style.opacity = "0.3";
+          ui_4.style.opacity = "0.3";
+          break;
+        }
+        case 3: {
+          ui_4.style.opacity = "1";
+          ui_1.style.opacity = "0.3";
+          ui_2.style.opacity = "0.3";
+          ui_3.style.opacity = "0.3";
+          break;
+        }
+      }
+    }
+
+    //버튼 클릭이벤트가 발생할 때마다 화면 움직일 때 사용할 변수의 값을 기준으로 왼쪽 클릭시 1씩 마이너스하고 그 값을 함수에 보냄, 오른쪽 클릭시 더해줌
+    leftBtn.addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlidePosition();
+      }
+    });
+
+    rightBtn.addEventListener("click", () => {
+      if (currentIndex < totalSlides - 1) {
+        currentIndex++;
+        updateSlidePosition();
+      }
+    });
+    /* 공부한 셈 치고
+        window.addEventListener('DOMContentLoaded', () => {
+          const slideImage = document.getElementById('slideImage');
+          //슬라이드이미지 상수 안에 html에서 슬라이드이미지라는 id를 받아옴
+          const leftButton = document.querySelector('.left');
+          //상수 레프트버튼 안에 html에서 left클래스를 가져옴
+          const rightButton = document.querySelector('.right');
+
+          const img = [
+            "images/chuu_1.jpeg",
+            "images/chuu_2.jpeg",
+            "images/chuu_3.jpeg",
+            "images/chuu_4.jpeg"
+          ];
+          //상수 img 안에 서버에 저장된 이미지를 배열로 저장함
+
+          let count = 0;
+          //이미지 숫자를 기억할 변수
+
+          leftButton.addEventListener('click', () => {
+            count = (count - 1 + img.length) % img.length;
+            slideImage.src = img[count];
+          });
+          //왼쪽 버튼이 눌렸을 때 카운트 변수에 변수-1 + 이미지 배열전체 / 이미지 배열숫자 해서 나온 값을 저장하고 슬라이드이미지를 가진 src에 이미지[카운트 변수]값에 해당하는 이미지를 출력
+
+          rightButton.addEventListener('click', () => {
+            count = (count + 1) % img.length;
+            slideImage.src = img[count];
+          });
+        });
+        */
+  </script>
+</html>
